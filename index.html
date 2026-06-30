@@ -55,7 +55,7 @@ body {
   text-decoration: none;
 }
 
-.nav-logo span { color: var(--accent); }
+.nav-logo span { color: #fff; }
 
 .nav-links {
   display: flex;
@@ -658,26 +658,6 @@ const HUBS = [
     ]
   },
   {
-    id: 'sales', name: 'Sales Hub',
-    desc: 'CRM, Deal-Pipelines & Vertriebsautomatisierung für dein Sales-Team.',
-    color: '#0091ae', perSeat: true,
-    tiers: [
-      { id: 'starter',      label: 'Starter',      price: 20,  note: 'pro Seat / Monat' },
-      { id: 'professional', label: 'Professional',  price: 100, note: 'pro Seat / Monat' },
-      { id: 'enterprise',   label: 'Enterprise',    price: 150, note: 'pro Seat / Monat' }
-    ]
-  },
-  {
-    id: 'service', name: 'Service Hub',
-    desc: 'Ticketing, Wissensdatenbank & Kundensupport in einer Plattform.',
-    color: '#e8c042', perSeat: true,
-    tiers: [
-      { id: 'starter',      label: 'Starter',      price: 20,  note: 'pro Seat / Monat' },
-      { id: 'professional', label: 'Professional',  price: 100, note: 'pro Seat / Monat' },
-      { id: 'enterprise',   label: 'Enterprise',    price: 130, note: 'pro Seat / Monat' }
-    ]
-  },
-  {
     id: 'content', name: 'Content Hub',
     desc: 'Website-Builder, KI-Content-Tools & SEO-Optimierung für dein Marketing.',
     color: '#9b59b6', perSeat: false,
@@ -688,13 +668,23 @@ const HUBS = [
     ]
   },
   {
-    id: 'data', name: 'Data Hub',
-    desc: 'Datenqualität, Business Intelligence & CRM-Integration.',
-    color: '#00bda5', perSeat: false,
+    id: 'aeo', name: 'AEO',
+    desc: 'Answer Engine Optimization – tracke, wie du in ChatGPT, Gemini & Perplexity erscheinst. Inklusive in Marketing Hub Professional & Enterprise.',
+    color: '#7c5cfc', perSeat: false,
     tiers: [
-      { id: 'starter',      label: 'Starter',      price: 20,   note: 'Basis-Datensync' },
-      { id: 'professional', label: 'Professional',  price: 720,  note: 'erw. Automatisierung' },
-      { id: 'enterprise',   label: 'Enterprise',    price: 2000, note: 'volle BI-Integration' }
+      { id: 'basic',    label: 'Basic',    price: 46,  note: '25 Prompts tägl. · 1 Brand' },
+      { id: 'plus',     label: 'Plus',     price: 92,  note: '50 Prompts tägl. · 2 Brands' },
+      { id: 'max',      label: 'Max',      price: 184, note: '100 Prompts tägl. · 4 Brands' }
+    ]
+  },
+  {
+    id: 'sales', name: 'Sales Hub',
+    desc: 'CRM, Deal-Pipelines & Vertriebsautomatisierung für dein Sales-Team.',
+    color: '#0091ae', perSeat: true,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 20,  note: 'pro Seat / Monat' },
+      { id: 'professional', label: 'Professional',  price: 100, note: 'pro Seat / Monat' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 150, note: 'pro Seat / Monat' }
     ]
   },
   {
@@ -708,13 +698,23 @@ const HUBS = [
     ]
   },
   {
-    id: 'aeo', name: 'AEO',
-    desc: 'Answer Engine Optimization – tracke, wie du in ChatGPT, Gemini & Perplexity erscheinst. Inklusive in Marketing Hub Professional & Enterprise.',
-    color: '#7c5cfc', perSeat: false,
+    id: 'service', name: 'Service Hub',
+    desc: 'Ticketing, Wissensdatenbank & Kundensupport in einer Plattform.',
+    color: '#e8c042', perSeat: true,
     tiers: [
-      { id: 'basic',    label: 'Basic',    price: 46,  note: '25 Prompts tägl. · 1 Brand' },
-      { id: 'plus',     label: 'Plus',     price: 92,  note: '50 Prompts tägl. · 2 Brands' },
-      { id: 'max',      label: 'Max',      price: 184, note: '100 Prompts tägl. · 4 Brands' }
+      { id: 'starter',      label: 'Starter',      price: 20,  note: 'pro Seat / Monat' },
+      { id: 'professional', label: 'Professional',  price: 100, note: 'pro Seat / Monat' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 130, note: 'pro Seat / Monat' }
+    ]
+  },
+  {
+    id: 'data', name: 'Data Hub',
+    desc: 'Datenqualität, Business Intelligence & CRM-Integration.',
+    color: '#00bda5', perSeat: false,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 20,   note: 'Basis-Datensync' },
+      { id: 'professional', label: 'Professional',  price: 720,  note: 'erw. Automatisierung' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 2000, note: 'volle BI-Integration' }
     ]
   }
 ];
