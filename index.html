@@ -1,0 +1,932 @@
+<title>HubSpot Lizenz-Konfigurator · RYZE Digital</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent: #e8541a;
+  --accent-glow: rgba(232, 84, 26, 0.15);
+  --accent-dim: rgba(232, 84, 26, 0.08);
+  --bg: #000000;
+  --bg-card: #0e0e0e;
+  --bg-raise: #141414;
+  --bg-panel: #0a0a0a;
+  --text: #ffffff;
+  --text-mid: rgba(255,255,255,0.6);
+  --text-low: rgba(255,255,255,0.35);
+  --border: rgba(255,255,255,0.07);
+  --border-mid: rgba(255,255,255,0.12);
+  --radius-card: 12px;
+  --radius-btn: 100px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ─────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.nav-logo {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-mid);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta {
+  background: var(--accent);
+  color: white !important;
+  padding: 9px 22px;
+  border-radius: var(--radius-btn);
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.02em;
+  transition: background 0.15s !important;
+}
+
+.nav-cta:hover { background: #d44a14 !important; }
+
+/* ── HERO ────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 96px 40px 104px;
+  background: #000;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(ellipse, rgba(232,84,26,0.14) 0%, transparent 65%);
+  top: -250px;
+  left: 50%;
+  transform: translateX(-30%);
+}
+
+.hero-glow::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(120,40,200,0.07) 0%, transparent 65%);
+  bottom: -100px;
+  right: 10%;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-size: clamp(40px, 5.5vw, 62px);
+  font-weight: 800;
+  line-height: 1.07;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-mid);
+  max-width: 460px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 30px;
+  border-radius: var(--radius-btn);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-solid { background: var(--accent); color: white; }
+.btn-solid:hover { background: #d44a14; }
+.btn-ghost { background: transparent; color: var(--text); border: 1.5px solid rgba(255,255,255,0.18); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.45); }
+
+/* ── PAGE GRID ───────────────────────────────────────── */
+.page-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 44px 40px 80px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* ── CONFIG CARD ─────────────────────────────────────── */
+.cfg-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-left-color: transparent;
+  border-radius: var(--radius-card);
+  padding: 26px 26px 22px;
+  margin-bottom: 12px;
+  transition: border-left-color 0.2s;
+}
+
+.cfg-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.eyebrow-dash {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  flex-shrink: 0;
+}
+
+.eyebrow-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.cfg-card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.cfg-card .cdesc {
+  font-size: 13.5px;
+  color: var(--text-low);
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+
+/* ── TIER GRID ───────────────────────────────────────── */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.tier-btn {
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 12px 10px 11px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  color: var(--text);
+}
+
+.tier-btn:hover {
+  border-color: var(--border-mid);
+  background: #1a1a1a;
+}
+
+.t-name {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+}
+
+.t-price {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.t-note {
+  display: block;
+  font-size: 10.5px;
+  color: var(--text-low);
+  line-height: 1.35;
+}
+
+.tier-btn.t-off {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+}
+
+/* ── SEAT STEPPER ────────────────────────────────────── */
+.stepper-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 11px 14px;
+  margin-top: 11px;
+}
+
+.stepper-lbl {
+  font-size: 13.5px;
+  color: var(--text-mid);
+  font-weight: 500;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-mid);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.stp-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+}
+
+.stp-btn:hover { background: rgba(255,255,255,0.06); }
+
+.stp-val {
+  width: 44px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  border-left: 1px solid var(--border-mid);
+  border-right: 1px solid var(--border-mid);
+  line-height: 34px;
+}
+
+/* ── CARD SUBTOTAL ───────────────────────────────────── */
+.card-sub {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.csub-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-low);
+  font-weight: 600;
+}
+
+.csub-amount {
+  font-size: 20px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.csub-unit { font-size: 13px; color: var(--text-low); }
+
+/* ── LAUFZEIT ────────────────────────────────────────── */
+.lz-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+.lz-btn {
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 14px 11px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.lz-btn:hover { border-color: var(--border-mid); background: #1a1a1a; }
+
+.lz-months {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.lz-billing {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-low);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.lz-disc {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lz-btn.lz-sel {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: 0 0 20px rgba(232,84,26,0.08);
+}
+
+.lz-btn.lz-sel .lz-months { color: var(--accent); }
+
+/* ── SUMMARY PANEL ───────────────────────────────────── */
+.sum-panel {
+  position: sticky;
+  top: 76px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.sum-head {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.sum-head-line {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.sum-head-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.sum-body { padding: 18px 22px 22px; }
+
+.sum-items { margin-bottom: 14px; }
+
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.sum-row:last-child { border-bottom: none; }
+
+.sn {
+  color: var(--text-mid);
+  flex: 1;
+  padding-right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.sdot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.sp {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.sum-sep { height: 1px; background: rgba(255,255,255,0.06); margin: 13px 0; }
+
+.sc {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  padding: 3px 0;
+}
+
+.sc-l { color: var(--text-low); }
+.sc-v { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--text-mid); }
+.sc-d { color: var(--accent); }
+
+.sum-total {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.stl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-low); margin-bottom: 5px; }
+
+.sta {
+  font-size: 38px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.sts { font-size: 13px; color: var(--text-low); margin-top: 3px; }
+
+.sum-year { margin-top: 14px; }
+.syl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-low); margin-bottom: 4px; }
+
+.sya {
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.sum-disc {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  font-size: 11px;
+  color: var(--text-low);
+  line-height: 1.6;
+}
+
+.sum-empty {
+  padding: 28px 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-low);
+  line-height: 1.65;
+}
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+  background: #000;
+  border-top: 1px solid var(--border);
+  padding: 22px 40px;
+}
+
+footer p {
+  max-width: 1180px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: var(--text-low);
+  line-height: 1.65;
+}
+
+footer a { color: var(--accent); text-decoration: none; }
+
+/* ── FOCUS / MOTION ──────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Hauptnavigation">
+  <a class="nav-logo" href="#">RYZE <span>DIGITAL</span></a>
+  <ul class="nav-links">
+    <li><a href="#konfigurator">Konfigurator</a></li>
+    <li><a href="#zusammenfassung">Zusammenfassung</a></li>
+    <li><a href="https://www.hubspot.de/pricing" target="_blank" rel="noopener" class="nav-cta">HubSpot Pricing</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">HubSpot Lizenz-Konfigurator</div>
+    <h1>Konfiguriere deinen<br><em>HubSpot Stack.</em></h1>
+    <p class="hero-sub">Wähle für jeden Hub den passenden Tarif, setze deine Laufzeit – und sieh sofort, was dein Bundle kostet.</p>
+    <div class="ctas">
+      <a href="#konfigurator" class="btn-pill btn-solid">Zum Konfigurator</a>
+      <a href="#zusammenfassung" class="btn-pill btn-ghost">Zur Zusammenfassung</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE GRID -->
+<div class="page-grid" id="konfigurator">
+  <main id="hub-cards" aria-label="Hub-Konfiguration"></main>
+  <aside class="sum-panel" id="zusammenfassung" aria-label="Preis-Zusammenfassung">
+    <div class="sum-head">
+      <span class="sum-head-line"></span>
+      <span class="sum-head-label">Zusammenfassung</span>
+    </div>
+    <div class="sum-body">
+      <div id="sum-content"></div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <p>Diese Preisindikation gilt ausschließlich zu Orientierungszwecken und dient nur zu Diskussionszwecken. Maßgeblich sind die jeweils aktuellen offiziellen Konditionen auf der <a href="https://www.hubspot.de/pricing" target="_blank" rel="noopener">HubSpot Pricing-Seite</a> sowie die finale Order Form und die HubSpot Customer Terms of Service. Alle Preise in EUR, zzgl. gesetzl. MwSt. &copy; 2026 RYZE Digital GmbH</p>
+</footer>
+
+<script>
+const HUBS = [
+  {
+    id: 'marketing', name: 'Marketing Hub',
+    desc: 'E-Mail-Marketing, Automatisierung & Lead-Management für skalierbares Wachstum.',
+    color: '#ff7a59', perSeat: false,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 15,   note: 'pro Seat / Monat',    perSeat: true  },
+      { id: 'professional', label: 'Professional',  price: 792,  note: 'inkl. 3 Core Seats',  perSeat: false },
+      { id: 'enterprise',   label: 'Enterprise',    price: 3530, note: 'inkl. 5 Core Seats',  perSeat: false }
+    ]
+  },
+  {
+    id: 'sales', name: 'Sales Hub',
+    desc: 'CRM, Deal-Pipelines & Vertriebsautomatisierung für dein Sales-Team.',
+    color: '#0091ae', perSeat: true,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 20,  note: 'pro Seat / Monat' },
+      { id: 'professional', label: 'Professional',  price: 100, note: 'pro Seat / Monat' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 150, note: 'pro Seat / Monat' }
+    ]
+  },
+  {
+    id: 'service', name: 'Service Hub',
+    desc: 'Ticketing, Wissensdatenbank & Kundensupport in einer Plattform.',
+    color: '#e8c042', perSeat: true,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 20,  note: 'pro Seat / Monat' },
+      { id: 'professional', label: 'Professional',  price: 100, note: 'pro Seat / Monat' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 130, note: 'pro Seat / Monat' }
+    ]
+  },
+  {
+    id: 'content', name: 'Content Hub',
+    desc: 'Website-Builder, KI-Content-Tools & SEO-Optimierung für dein Marketing.',
+    color: '#9b59b6', perSeat: false,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 23,   note: 'inkl. 1 Core Seat' },
+      { id: 'professional', label: 'Professional',  price: 500,  note: 'inkl. 3 Core Seats' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 1500, note: 'inkl. 5 Core Seats' }
+    ]
+  },
+  {
+    id: 'data', name: 'Data Hub',
+    desc: 'Datenqualität, Business Intelligence & CRM-Integration.',
+    color: '#00bda5', perSeat: false,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 20,   note: 'Basis-Datensync' },
+      { id: 'professional', label: 'Professional',  price: 720,  note: 'erw. Automatisierung' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 2000, note: 'volle BI-Integration' }
+    ]
+  },
+  {
+    id: 'revenue', name: 'Revenue Hub',
+    desc: 'Forecasting, Pipeline-Analyse & Revenue Intelligence für den Vertrieb.',
+    color: '#e74c3c', perSeat: true,
+    tiers: [
+      { id: 'starter',      label: 'Starter',      price: 25,  note: 'pro Seat / Monat' },
+      { id: 'professional', label: 'Professional',  price: 75,  note: 'pro Seat / Monat' },
+      { id: 'enterprise',   label: 'Enterprise',    price: 120, note: 'pro Seat / Monat' }
+    ]
+  },
+  {
+    id: 'aeo', name: 'AEO',
+    desc: 'Answer Engine Optimization – tracke, wie du in ChatGPT, Gemini & Perplexity erscheinst. Inklusive in Marketing Hub Professional & Enterprise.',
+    color: '#7c5cfc', perSeat: false,
+    tiers: [
+      { id: 'basic',    label: 'Basic',    price: 46,  note: '25 Prompts tägl. · 1 Brand' },
+      { id: 'plus',     label: 'Plus',     price: 92,  note: '50 Prompts tägl. · 2 Brands' },
+      { id: 'max',      label: 'Max',      price: 184, note: '100 Prompts tägl. · 4 Brands' }
+    ]
+  }
+];
+
+const LAUFZEITEN = [
+  { id: '12m', months: 12, label: '12 Monate', billing: 'Monatl. Zahlung',  discount: 0  },
+  { id: '12a', months: 12, label: '12 Monate', billing: 'Jährl. Zahlung',   discount: 5  },
+  { id: '24a', months: 24, label: '24 Monate', billing: 'Jährl. Zahlung',   discount: 10 },
+  { id: '36a', months: 36, label: '36 Monate', billing: 'Jährl. Zahlung',   discount: 15 }
+];
+
+const state = {
+  laufzeit: '12a',
+  hubs: Object.fromEntries(HUBS.map(h => [h.id, { tier: null, seats: 1 }]))
+};
+
+function fmt(n) {
+  return n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
+}
+
+function hubMonthly(hub) {
+  const s = state.hubs[hub.id];
+  if (!s.tier) return 0;
+  const tier = hub.tiers.find(t => t.id === s.tier);
+  const perSeat = tier.perSeat !== undefined ? tier.perSeat : hub.perSeat;
+  return perSeat ? tier.price * s.seats : tier.price;
+}
+
+function tierIsPerSeat(hub, tierId) {
+  if (!tierId) return false;
+  const tier = hub.tiers.find(t => t.id === tierId);
+  if (!tier) return false;
+  return tier.perSeat !== undefined ? tier.perSeat : hub.perSeat;
+}
+
+function activeLz() {
+  return LAUFZEITEN.find(l => l.id === state.laufzeit);
+}
+
+function renderCards() {
+  const container = document.getElementById('hub-cards');
+  let html = '';
+
+  HUBS.forEach(hub => {
+    const s = state.hubs[hub.id];
+    const isActive = !!s.tier;
+    const monthly = hubMonthly(hub);
+    const lbColor = isActive ? hub.color : 'transparent';
+
+    const cols = hub.tiers.length + 1; // Kein + tiers
+    html += `<div class="cfg-card" style="border-left-color:${lbColor}${isActive ? ';box-shadow:-6px 0 24px rgba(0,0,0,0.3)' : ''}">`;
+
+    html += `
+      <div class="cfg-eyebrow">
+        <span class="eyebrow-dash" style="background:${hub.color}"></span>
+        <span class="eyebrow-label" style="color:${hub.color}">${hub.name}</span>
+      </div>
+      <h3>${hub.name}</h3>
+      <div class="cdesc">${hub.desc}</div>
+      <div class="tier-grid" style="grid-template-columns:repeat(${cols},1fr)">`;
+
+    // Off
+    const offSel = !s.tier;
+    html += `
+      <button class="tier-btn t-off" onclick="selectTier('${hub.id}',null)"
+              style="${offSel ? 'border-color:rgba(255,255,255,0.22);background:rgba(255,255,255,0.04)' : ''}"
+              aria-pressed="${offSel}">
+        <span class="t-name" style="${offSel ? 'color:rgba(255,255,255,0.5)' : ''}">Kein Hub</span>
+        <span class="t-price" style="color:rgba(255,255,255,0.2);font-size:22px">—</span>
+        <span class="t-note">Deaktiviert</span>
+      </button>`;
+
+    hub.tiers.forEach(tier => {
+      const sel = s.tier === tier.id;
+      const bc = sel ? hub.color : 'rgba(255,255,255,0.07)';
+      const bg = sel ? `rgba(${hexToRgb(hub.color)},0.1)` : 'var(--bg-raise)';
+      const glow = sel ? `box-shadow:0 0 0 1px ${hub.color}40,0 4px 20px rgba(0,0,0,0.4);` : '';
+      html += `
+        <button class="tier-btn" onclick="selectTier('${hub.id}','${tier.id}')"
+                style="border-color:${bc};background:${bg};${glow}"
+                aria-pressed="${sel}">
+          <span class="t-name" style="${sel ? `color:${hub.color}` : ''}">${tier.label}</span>
+          <span class="t-price" style="${sel ? `color:${hub.color}` : ''}">${tier.price.toLocaleString('de-DE')} €</span>
+          <span class="t-note">${tier.note}</span>
+        </button>`;
+    });
+
+    html += '</div>';
+
+    if (isActive && tierIsPerSeat(hub, s.tier)) {
+      html += `
+        <div class="stepper-row">
+          <span class="stepper-lbl">Anzahl Seats</span>
+          <div class="stepper">
+            <button class="stp-btn" onclick="chgSeats('${hub.id}',-1)" aria-label="Weniger">−</button>
+            <span class="stp-val">${s.seats}</span>
+            <button class="stp-btn" onclick="chgSeats('${hub.id}',1)" aria-label="Mehr">+</button>
+          </div>
+        </div>`;
+    }
+
+    if (isActive) {
+      html += `
+        <div class="card-sub">
+          <span class="csub-label">Zwischensumme</span>
+          <span class="csub-amount">${monthly.toLocaleString('de-DE')} €</span>
+          <span class="csub-unit">/Monat</span>
+        </div>`;
+    }
+
+    html += '</div>';
+  });
+
+  // Laufzeit
+  html += `
+    <div class="cfg-card" style="border-left-color:var(--accent)">
+      <div class="cfg-eyebrow">
+        <span class="eyebrow-dash" style="background:var(--accent)"></span>
+        <span class="eyebrow-label" style="color:var(--accent)">Vertragslaufzeit</span>
+      </div>
+      <h3>Je länger, desto günstiger</h3>
+      <div class="cdesc">Wähle Laufzeit und Zahlungsweise – Rabatte stapeln sich auf den Listenpreis.</div>
+      <div class="lz-grid">`;
+
+  LAUFZEITEN.forEach(lz => {
+    const sel = state.laufzeit === lz.id;
+    html += `
+      <button class="lz-btn${sel ? ' lz-sel' : ''}" onclick="selectLz('${lz.id}')" aria-pressed="${sel}">
+        <span class="lz-months">${lz.label}</span>
+        <span class="lz-billing">${lz.billing}</span>
+        <span class="lz-disc" style="color:${lz.discount > 0 ? 'var(--accent)' : 'var(--text-low)'}">
+          ${lz.discount > 0 ? '− ' + lz.discount + ' %' : '− 0 %'}
+        </span>
+      </button>`;
+  });
+
+  html += '</div></div>';
+  container.innerHTML = html;
+}
+
+function renderSummary() {
+  const el = document.getElementById('sum-content');
+  const lz = activeLz();
+  const active = HUBS.filter(h => state.hubs[h.id].tier);
+
+  if (!active.length) {
+    el.innerHTML = '<div class="sum-empty">Noch keine Hubs ausgewählt.<br>Wähle oben einen Tarif für jeden gewünschten Hub.</div>';
+    return;
+  }
+
+  let listTotal = 0;
+  let itemsHtml = '';
+
+  active.forEach(hub => {
+    const s = state.hubs[hub.id];
+    const tier = hub.tiers.find(t => t.id === s.tier);
+    const m = hubMonthly(hub);
+    listTotal += m;
+    const seatInfo = tierIsPerSeat(hub, s.tier) ? ` · ${s.seats} Seat${s.seats !== 1 ? 's' : ''}` : '';
+    itemsHtml += `
+      <div class="sum-row">
+        <span class="sn"><span class="sdot" style="background:${hub.color}"></span>${hub.name} ${tier.label}${seatInfo}</span>
+        <span class="sp">${fmt(m)}</span>
+      </div>`;
+  });
+
+  const discPct = lz.discount;
+  const discAmt = listTotal * discPct / 100;
+  const eff = listTotal - discAmt;
+  const total = eff * lz.months;
+  const savings = discAmt * lz.months;
+
+  let html = `<div class="sum-items">${itemsHtml}</div><div class="sum-sep"></div>`;
+
+  html += `<div class="sc"><span class="sc-l">Listenpreis / Monat</span><span class="sc-v">${fmt(listTotal)}</span></div>`;
+
+  if (discAmt > 0) {
+    html += `
+      <div class="sc"><span class="sc-l">Laufzeit-Rabatt (${lz.label} / ${lz.billing})</span><span class="sc-v sc-d">− ${discPct} %</span></div>
+      <div class="sc"><span class="sc-l">Rabatt gesamt</span><span class="sc-v sc-d">− ${fmt(discAmt)}</span></div>`;
+  }
+
+  html += `
+    <div class="sum-total">
+      <div class="stl">Effektiv pro Monat</div>
+      <div class="sta">${fmt(eff)}</div>
+      <div class="sts">/ Monat (exkl. MwSt.)</div>
+    </div>
+    <div class="sum-year">
+      <div class="syl">Gesamtsumme (${lz.months} Monate)</div>
+      <div class="sya">${fmt(total)}</div>
+    </div>`;
+
+  if (savings > 0) {
+    html += `<div class="sc" style="margin-top:9px"><span class="sc-l">Ersparnis ggü. Listenpreis</span><span class="sc-v sc-d">− ${fmt(savings)}</span></div>`;
+  }
+
+  html += `<div class="sum-disc">Indikative Preise. Maßgeblich sind die finale Order Form und die HubSpot Customer Terms of Service.</div>`;
+  el.innerHTML = html;
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function selectTier(hubId, tierId) { state.hubs[hubId].tier = tierId; render(); }
+function chgSeats(hubId, delta) { const s = state.hubs[hubId]; s.seats = Math.max(1, (s.seats||1)+delta); render(); }
+function selectLz(id) { state.laufzeit = id; render(); }
+function render() { renderCards(); renderSummary(); }
+
+render();
+</script>
