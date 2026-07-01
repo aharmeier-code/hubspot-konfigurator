@@ -447,6 +447,44 @@ body {
 
 .lz-btn.lz-sel .lz-months { color: var(--accent); }
 
+/* ── CREDITS ─────────────────────────────────────────── */
+.credits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.credit-cell {
+  background: var(--bg-raise);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.credit-tier {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-mid);
+}
+
+.credit-amount {
+  font-size: 28px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.credit-label {
+  font-size: 11px;
+  color: var(--text-low);
+}
+
 /* ── SUMMARY PANEL ───────────────────────────────────── */
 .sum-panel {
   position: sticky;
@@ -942,6 +980,34 @@ function renderCards() {
 
     html += '</div>';
   });
+
+  // HubSpot Credits
+  html += `
+    <div class="cfg-card" style="border-left-color:#00a4bd">
+      <div class="cfg-eyebrow">
+        <span class="eyebrow-dash" style="background:#00a4bd"></span>
+        <span class="eyebrow-label" style="color:#00a4bd">HubSpot Credits</span>
+      </div>
+      <h3>HubSpot Credits</h3>
+      <div class="cdesc">Credits sind die flexible Währung für KI-gestützte Features wie <strong>Breeze AI</strong> – Breeze Customer Agent (50 Credits/Konversation), Breeze Data Agent und weitere KI-Automatisierungen. Inklusive je nach Tarif, weitere Credits zukaufbar.</div>
+      <div class="credits-grid">
+        <div class="credit-cell">
+          <span class="credit-tier">Starter</span>
+          <span class="credit-amount" style="color:#00a4bd">500</span>
+          <span class="credit-label">Credits / Monat</span>
+        </div>
+        <div class="credit-cell">
+          <span class="credit-tier">Professional</span>
+          <span class="credit-amount" style="color:#00a4bd">3.000</span>
+          <span class="credit-label">Credits / Monat</span>
+        </div>
+        <div class="credit-cell">
+          <span class="credit-tier">Enterprise</span>
+          <span class="credit-amount" style="color:#00a4bd">5.000</span>
+          <span class="credit-label">Credits / Monat</span>
+        </div>
+      </div>
+    </div>`;
 
   // Laufzeit
   html += `
