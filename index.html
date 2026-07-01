@@ -928,6 +928,7 @@ function updateCreditCalc(val) {
   state.creditUnits = units;
   document.getElementById('credit-calc-result').textContent =
     (units * CREDIT_PRICE_PER_1000).toLocaleString('de-DE', { maximumFractionDigits: 2 }) + ' €';
+  renderSummary();
 }
 
 function fmt(n) {
@@ -1108,8 +1109,9 @@ function renderSummary() {
   const el = document.getElementById('sum-content');
   const lz = activeLz();
   const active = HUBS.filter(h => state.hubs[h.id].tier);
+  const creditCost = state.creditUnits * CREDIT_PRICE_PER_1000;
 
-  if (!active.length) {
+  if (!active.length && creditCost <= 0) {
     el.innerHTML = '<div class="sum-empty">Noch keine Hubs ausgewählt.<br>Wähle oben einen Tarif für jeden gewünschten Hub.</div>';
     return;
   }
@@ -1130,15 +1132,27 @@ function renderSummary() {
       </div>`;
   });
 
+  if (creditCost > 0) {
+    itemsHtml += `
+      <div class="sum-row">
+        <span class="sn"><span class="sdot" style="background:#00a4bd"></span>HubSpot Credits · ${state.creditUnits.toLocaleString('de-DE')} × 1.000</span>
+        <span class="sp">${fmt(creditCost)}</span>
+      </div>`;
+  }
+
   const discPct = lz.discount;
   const discAmt = listTotal * discPct / 100;
-  const eff = listTotal - discAmt;
-  const total = eff * lz.months;
+  const eff = listTotal - discAmt + creditCost;
+  const total = (listTotal - discAmt) * lz.months + creditCost * lz.months;
   const savings = discAmt * lz.months;
 
   let html = `<div class="sum-items">${itemsHtml}</div><div class="sum-sep"></div>`;
 
-  html += `<div class="sc"><span class="sc-l">Listenpreis / Monat</span><span class="sc-v">${fmt(listTotal)}</span></div>`;
+  html += `<div class="sc"><span class="sc-l">Listenpreis Hubs / Monat</span><span class="sc-v">${fmt(listTotal)}</span></div>`;
+
+  if (creditCost > 0) {
+    html += `<div class="sc"><span class="sc-l">HubSpot Credits / Monat</span><span class="sc-v">${fmt(creditCost)}</span></div>`;
+  }
 
   if (discAmt > 0) {
     html += `
@@ -1159,6 +1173,10 @@ function renderSummary() {
 
   if (savings > 0) {
     html += `<div class="sc" style="margin-top:9px"><span class="sc-l">Ersparnis ggü. Listenpreis</span><span class="sc-v sc-d">− ${fmt(savings)}</span></div>`;
+  }
+
+  if (creditCost > 0) {
+    html += `<div class="sum-disc">HubSpot Credits sind Pay-as-you-go, werden monatlich zurückgesetzt und unterliegen keinem Laufzeit-Rabatt.</div>`;
   }
 
   html += `<div class="sum-disc">Indikative Preise. Maßgeblich sind die finale Order Form und die HubSpot Customer Terms of Service.</div>`;
