@@ -485,6 +485,42 @@ body {
   color: var(--text-low);
 }
 
+/* ── CREDIT RECHNER ──────────────────────────────────── */
+.credit-calc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.credit-calc-label {
+  font-size: 12.5px;
+  color: var(--text-mid);
+}
+
+.credit-calc-input {
+  width: 100px;
+  background: var(--bg-raise);
+  border: 1px solid var(--border-mid);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: right;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.credit-calc-input:focus { border-color: #00a4bd; }
+
+.credit-calc-footnote {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-low);
+  padding: 0 4px;
+}
+
 /* ── SUMMARY PANEL ───────────────────────────────────── */
 .sum-panel {
   position: sticky;
@@ -881,8 +917,18 @@ const LAUFZEITEN = [
 
 const state = {
   laufzeit: '12a',
+  creditUnits: 0,
   hubs: Object.fromEntries(HUBS.map(h => [h.id, { tier: null, seats: 1 }]))
 };
+
+const CREDIT_PRICE_PER_1000 = 9;
+
+function updateCreditCalc(val) {
+  const units = Math.max(0, parseFloat(val) || 0);
+  state.creditUnits = units;
+  document.getElementById('credit-calc-result').textContent =
+    (units * CREDIT_PRICE_PER_1000).toLocaleString('de-DE', { maximumFractionDigits: 2 }) + ' €';
+}
 
 function fmt(n) {
   return n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
@@ -1008,6 +1054,28 @@ function renderCards() {
         </div>
       </div>
     </div>`;
+
+  // Credit Rechner
+  html += `
+    <div class="cfg-card" style="border-left-color:#00a4bd">
+      <div class="cfg-eyebrow">
+        <span class="eyebrow-dash" style="background:#00a4bd"></span>
+        <span class="eyebrow-label" style="color:#00a4bd">Credit Rechner</span>
+      </div>
+      <h3>Credit Rechner</h3>
+      <div class="cdesc">9 € pro 1.000 Guthabeneinheiten. Guthaben werden monatlich zurückgesetzt.</div>
+      <div class="credit-calc-row">
+        <label class="credit-calc-label" for="credit-calc-input">Anzahl 1.000er-Einheiten</label>
+        <input type="number" id="credit-calc-input" class="credit-calc-input" min="0" step="1"
+               value="${state.creditUnits}" oninput="updateCreditCalc(this.value)" />
+      </div>
+      <div class="card-sub">
+        <span class="csub-label">Gesamtpreis</span>
+        <span class="csub-amount" id="credit-calc-result">${(state.creditUnits * CREDIT_PRICE_PER_1000).toLocaleString('de-DE')} €</span>
+        <span class="csub-unit">/Monat</span>
+      </div>
+    </div>
+    <p class="credit-calc-footnote">Mit HubSpot-Guthaben kann Ihr Team die Nutzung von Funktionen wie KI-Tools und Automatisierungen verwalten und planen. Ihr Account enthält eine bestimmte Anzahl an Guthabeneinheiten pro Monat, die abhängig von Ihrer höchsten Produktedition auf Ihr Team verteilt werden.</p>`;
 
   // Laufzeit
   html += `
